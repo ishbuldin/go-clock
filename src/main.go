@@ -22,21 +22,29 @@ func cleanTerminal() {
     }
 }
 
-func printTime() {
-    _,_,previousSecond := time.Now().Clock()
-    for {
-        hour,minute,second := time.Now().Clock()
-        time.Sleep(10 * time.Millisecond)
-        if(second != previousSecond) {
-            cleanTerminal()
-            fmt.Printf("%d:%d:%02d \n", hour, minute, second)
-            previousSecond = second
+func PrintTime(duration time.Duration) {
+    quit := make(chan bool)
+    go func() {
+        _,_,previousSecond := time.Now().Clock()
+        for {
+            select {
+                case <- quit:
+                    return
+                default:
+                    hour,minute,second := time.Now().Clock()
+                    time.Sleep(10 * time.Millisecond)
+                    if(second != previousSecond) {
+                        cleanTerminal()
+                        fmt.Printf("%02d:%02d:%02d\n", hour, minute, second)
+                        previousSecond = second
+                    }
+            }
         }
-    }
+    }()
+    time.Sleep(duration)
+    quit <- true
 }
 
 func main() {
-    go printTime()
-    var input string
-    fmt.Scanln(&input)
+    PrintTime(10 * time.Second)
 }
