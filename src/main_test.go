@@ -9,6 +9,8 @@ import (
     "strings"
     "log"
     "strconv"
+//     "bou.ke/monkey"
+//     "reflect"
 )
 
 type test struct {
@@ -25,6 +27,45 @@ var tests = []test {
 }
 
 func TestPrintTime(t *testing.T) {
+
+//     type clock struct {
+//         hour int
+//         min int
+//         sec int
+//     }
+//     clocks := []clock {
+//         { 10, 10, 10 },
+//         { 10, 10, 11 },
+//         { 10, 10, 12 },
+//         { 10, 10, 13 },
+//         { 10, 10, 14 },
+//         { 10, 10, 15 },
+//         { 10, 10, 16 },
+//         { 10, 10, 17 },
+//         { 10, 10, 18 },
+//         { 10, 10, 19 },
+//         { 10, 10, 20 },
+//         { 10, 10, 21 },
+//         { 10, 10, 22 },
+//         { 10, 10, 23 },
+//         { 10, 10, 24 },
+//         { 10, 10, 25 },
+//         { 10, 10, 26 },
+//         { 10, 10, 27 },
+//         { 10, 10, 28 },
+//         { 10, 10, 29 },
+//         { 10, 10, 30 },
+//     }
+//     i := 0
+//     var t1 time.Time
+//     monkey.PatchInstanceMethod(reflect.TypeOf(t1), "Clock", func(t1 time.Time) (hour, min, sec int) {
+//         hour = clocks[i].hour
+//         min = clocks[i].min
+//         sec = clocks[i].sec
+//         time.Sleep(1000 * time.Millisecond)
+//         i++
+//         return
+//     } )
 
     for i, data := range tests {
         log.Print("Start test: #", strconv.Itoa(i))
